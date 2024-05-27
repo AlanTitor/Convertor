@@ -1,4 +1,4 @@
-#import asyncio
+import asyncio
 import flet as ft
 from converter import converter_pdf2docx
 
@@ -10,21 +10,25 @@ def start():
         page.window_width = 650  # window's width
         page.window_height = 400  # window's height
 
-        def file_picked(e: ft.FilePickerResultEvent):
+        async def file_picked(e: ft.FilePickerResultEvent):
             if not e.files:  # Если файла нет, то вернуться назад
                 return
 
-            #pick_files_button.disabled = True  # Отключить кнопку при выборе файла
-            #progress_ring.visible = True  # Включить кольцо ожидания
-            #page.update()  # Обновить UI
+            await asyncio.sleep(1)
+            pick_files_button.disabled = True  # Отключить кнопку при выборе файла
+            progress_ring.visible = True  # Включить кольцо ожидания
+            page.update()  # Обновить UI
+            await asyncio.sleep(1)
 
             for file in e.files:
                 file_path = file.path
                 convert_and_show_result(file_path)
 
-            #progress_ring.visible = False  # Выключить кольцо ожидания
-            #pick_files_button.disabled = False  # Включить кнопку при выборе файла
-            #page.update()  # Обновить UI
+            await asyncio.sleep(1)
+            progress_ring.visible = False  # Выключить кольцо ожидания
+            pick_files_button.disabled = False  # Включить кнопку при выборе файла
+            page.update()  # Обновить UI
+            await asyncio.sleep(1)
 
         def convert_and_show_result(file_path):
             try:
@@ -37,8 +41,7 @@ def start():
                     ft.Text(value=f"Converting error!", color="red")  # Всплывающее сообщение об ошибке операции
                 )
                 raise Exception(f"Error: {err}")
-            finally:
-                #await asyncio.sleep(3)
+            finally:                
                 page.snack_bar.open = True  # Активация всплывающего сообщения
                 page.update()
 
