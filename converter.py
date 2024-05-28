@@ -10,12 +10,12 @@ def replace_file_extension(file_path, new_extension=".docx"):
 
 # Конвертация из PDF в DOCX
 def converter_pdf2docx(file_path):
-    pdf_file = file_path  # Путь к PDF файлу
+    #pdf_file = file_path  # Путь к PDF файлу
     docx_file = replace_file_extension(file_path)  # Путь куда сохранить DOCX файл
 
     try:
         # Convert PFD to DOCX
-        cv = Converter(pdf_file)
+        cv = Converter(file_path)
         cv.convert(docx_file, multiprocessing=True, start=0, end=None)
         cv.close()
     except Exception as err:

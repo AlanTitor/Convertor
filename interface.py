@@ -10,9 +10,9 @@ def start():
         page.title = "File Convertor"  # Название приложения (сверху)
         page.vertical_alignment = ft.MainAxisAlignment.CENTER
         page.window_width = 650  # window's width        
-        page.window_height = 400  # window's height        
+        page.window_height = 400  # window's height
         page.theme_mode = ThemeMode.DARK
-        page.window_resizable = False        
+        page.window_resizable = False
 
 
         async def file_picked(e: ft.FilePickerResultEvent):
